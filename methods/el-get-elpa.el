@@ -141,7 +141,7 @@ the recipe, then return nil."
           ;; in windows, we have to actually copy the directories,
           ;; since symlink is not exactly reliable on those systems
           (copy-directory (el-get-elpa-package-directory package)
-                          (file-name-as-directory (expand-file-name package el-get-dir)) nil t)
+                          (file-name-as-directory (expand-file-name package el-get-dir)) nil t t)
         (let ((default-directory el-get-dir))
           (make-symbolic-link elpa-dir package))))))
 
