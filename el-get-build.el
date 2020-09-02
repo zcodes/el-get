@@ -222,15 +222,15 @@ recursion.
                      (file-directory-p infodir-abs)
                      (not (file-exists-p info-dir)))
             (el-get-set-info-path package infodir-rel)
-            (setq infofile (convert-standard-filename
-                             (if (string= (substring infofile -5) ".info")
-                                 infofile
-                                 (concat infofile ".info"))))
-            (if (memq system-type '(ms-dos windows-nt))
-                (setq infofile (replace-regexp-in-string "/" "\\\\" infofile)))
             (el-get-build
              package
-             (list (list el-get-install-info infofile "dir")) infodir-rel t nil t)))
+             (list (list el-get-install-info
+                         (convert-standard-filename
+                          (if (string= (substring infofile -5) ".info")
+                              infofile
+                            (concat infofile ".info")))
+                         "dir"))
+             infodir-rel t nil t)))
          (t
           (error
            "el-get-install-or-init-info: %s not supported" build-or-init)))))))
